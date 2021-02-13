@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 import { envHost } from '../../config/constants';
 import { ChangePasswordDto } from '../dto';
-import User from '../entities/user.entity';
+import User from '../entities/users.entity';
 
 @Injectable()
 export class AuthService {

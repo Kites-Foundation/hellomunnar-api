@@ -1,8 +1,7 @@
 import {Injectable, Logger} from '@nestjs/common';
-import { GoogleDto } from '../dto/google.dto';
 import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
-import Users from "../entities/user.entity";
+import Users from "../entities/users.entity";
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
