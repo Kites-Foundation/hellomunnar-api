@@ -4,6 +4,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { SessionModule } from 'nestjs-session';
 import { ConfigModule } from './config';
 import { watchmanModule } from './watchman/watchman.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { watchmanModule } from './watchman/watchman.module';
       },
     }),
     watchmanModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [
