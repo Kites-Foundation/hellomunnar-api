@@ -18,11 +18,11 @@ export class ConfigModule {
       port: Number(process.env.DB_PORT),
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
-      migrationsRun: false,
+      migrationsRun: true,
       database: process.env.DB_NAME,
       entities: [ePath],
       migrations: [mPath],
-      synchronize: true,
+      synchronize: false,
       autoLoadEntities: true,
       logging: ['query', 'error', 'schema', 'warn', 'info', 'log', 'migration'],
     });
