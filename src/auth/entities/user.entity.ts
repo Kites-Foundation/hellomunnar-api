@@ -23,11 +23,11 @@ export default class Users {
   password: string;
   @Column({ nullable: true, length: 2000 })
   token: string;
-  @Column({ length: 2000 })
+  @Column({nullable: true })
   googleId: string;
   @Column({ length: 2000 })
   googleImageUrl: string;
-  @Column({nullable: true,  length: 200 })
+  @Column({nullable: true })
   facebookId: string;
   @Column({nullable: true, length: 200 })
   facebookImageUrl: string;
