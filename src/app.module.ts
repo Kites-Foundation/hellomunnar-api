@@ -8,7 +8,7 @@ import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot('munnar'),
     CacheModule.register({
       store: redisStore,
       host: process.env.X_REDIS_HOST,
