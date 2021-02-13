@@ -4,10 +4,14 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { SessionModule } from 'nestjs-session';
 import { ConfigModule } from './config';
 import { watchmanModule } from './watchman/watchman.module';
+import { AuthModule } from './auth/auth.module';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { nestMailer } from './config/constants';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot('munnar'),
     CacheModule.register({
       store: redisStore,
       host: process.env.X_REDIS_HOST,
@@ -23,7 +27,20 @@ import { watchmanModule } from './watchman/watchman.module';
         },
       },
     }),
+    MailerModule.forRootAsync({
+      useFactory: () => ({
+        transport: nestMailer.transport,
+        template: {
+          dir: './templates',
+          adapter: new HandlebarsAdapter(),
+          options: {
+            strict: true,
+          },
+        },
+      }),
+    }),
     watchmanModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [
