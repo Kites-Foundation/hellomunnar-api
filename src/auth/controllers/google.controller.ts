@@ -1,8 +1,7 @@
 import { ApiTags } from '@nestjs/swagger';
-import { Body, Controller, Get, Logger, Req, UseGuards } from '@nestjs/common';
+import {  Controller, Get, Logger, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { GoogleService } from '../services';
-import { GoogleDto } from '../dto/google.dto';
 
 @ApiTags('Google Auth')
 @Controller('google')
