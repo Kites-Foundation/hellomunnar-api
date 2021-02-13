@@ -1,7 +1,8 @@
 import { ApiTags } from '@nestjs/swagger';
-import {Controller, Get, Logger, Req, UseGuards} from '@nestjs/common';
+import { Body, Controller, Get, Logger, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { GoogleService } from '../services/google.service';
+import { GoogleService } from '../services';
+import { GoogleDto } from '../dto/google.dto';
 
 @ApiTags('Google Auth')
 @Controller('google')
@@ -17,7 +18,7 @@ export class GoogleController {
   @Get('redirect')
   @UseGuards(AuthGuard('google'))
   googleAuthRedirect(@Req() req) {
-    this.logger.verbose(`User Logged in ${req.user.email}`);
+    this.logger.verbose(`User Logged in ${req.user.email} `);
     return this.googleService.googleLogin(req);
   }
 }

@@ -5,6 +5,9 @@ import { SessionModule } from 'nestjs-session';
 import { ConfigModule } from './config';
 import { watchmanModule } from './watchman/watchman.module';
 import { AuthModule } from './auth/auth.module';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { nestMailer } from './config/constants';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 
 @Module({
   imports: [
@@ -23,6 +26,18 @@ import { AuthModule } from './auth/auth.module';
           maxAge: 1000 * 60 * 100,
         },
       },
+    }),
+    MailerModule.forRootAsync({
+      useFactory: () => ({
+        transport: nestMailer.transport,
+        template: {
+          dir: './templates',
+          adapter: new HandlebarsAdapter(),
+          options: {
+            strict: true,
+          },
+        },
+      }),
     }),
     watchmanModule,
     AuthModule,
