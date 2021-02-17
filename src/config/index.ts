@@ -24,7 +24,7 @@ export class ConfigModule {
       migrations: [mPath],
       synchronize: false,
       autoLoadEntities: true,
-      logging: ['query', 'error', 'schema', 'warn', 'info', 'log', 'migration'],
+       logging: ['error', 'warn', 'log', 'migration'],
     });
     return {
       module: ConfigModule,

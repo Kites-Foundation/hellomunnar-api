@@ -24,7 +24,6 @@ export class GoogleService {
      const user = await this.userRepository.findOne({
        email: req.user.email
      });
-     this.logger.verbose(req.user);
      if(user) {
        return {
          message: 'User Exists',
@@ -42,7 +41,9 @@ export class GoogleService {
          googleDto.uuid = uuidv4();
          googleDto.status = 'ACTIVE';
          googleDto.type = 'USER';
+         googleDto.token = req.user.accessToken;
          const saveUser = await this.userRepository.save(googleDto);
+
          const {...savedUser} = saveUser;
          return {
            message: 'User Retrieved from Google',
