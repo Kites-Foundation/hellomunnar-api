@@ -13,7 +13,7 @@ export class GoogleService {
   ) {
   }
  async googleLogin(req): Promise<any> {
-    const googleDto = req;
+
    try {
      if (!req.user) {
        return {
@@ -33,6 +33,7 @@ export class GoogleService {
        }
      } else {
        if(req.user) {
+         const googleDto: any = {};
          googleDto.name = `${req.user.firstName + req.user.lastName}`;
          googleDto.userName = req.user.displayName;
          googleDto.email = req.user.email;

@@ -8,16 +8,10 @@ export class user1613218635603 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'varchar',
+            type: 'uuid',
             isPrimary: true,
             isGenerated: true,
-            generationStrategy: 'increment',
-          },
-          {
-            name: 'uuid',
-            type: 'varchar',
-            isUnique: true,
-            isNullable: true,
+            generationStrategy: 'uuid',
           },
           {
             name: 'name',
@@ -25,7 +19,7 @@ export class user1613218635603 implements MigrationInterface {
             isNullable: true,
           },
           {
-            name: 'username',
+            name: 'userName',
             type: 'varchar',
             isNullable: true,
             isUnique: true,
@@ -100,7 +94,7 @@ export class user1613218635603 implements MigrationInterface {
           },
           {
             name: 'createdAt',
-            type: 'timestamp(IST)',
+            type: 'timestamp',
             default: 'CURRENT_TIMESTAMP',
             isNullable: false,
           },
