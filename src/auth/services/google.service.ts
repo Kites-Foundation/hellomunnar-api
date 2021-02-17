@@ -43,6 +43,7 @@ export class GoogleService {
          googleDto.status = 'ACTIVE';
          googleDto.type = 'USER';
          const saveUser = await this.userRepository.save(googleDto);
+         saveUser.token = req.user.accessToken;
          const {...savedUser} = saveUser;
          return {
            message: 'User Retrieved from Google',
