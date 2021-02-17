@@ -24,7 +24,6 @@ export class GoogleService {
      const user = await this.userRepository.findOne({
        email: req.user.email
      });
-     this.logger.verbose(req.user);
      if(user) {
        return {
          message: 'User Exists',
