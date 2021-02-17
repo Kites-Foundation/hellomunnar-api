@@ -10,9 +10,7 @@ import {
 @Unique(['email'])
 export default class Users {
   @PrimaryGeneratedColumn()
-  id: number;
-  @Column()
-  uuid: string;
+  id: string;
   @Column()
   name: string;
   @Column()
