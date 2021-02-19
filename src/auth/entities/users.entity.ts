@@ -1,10 +1,13 @@
 import {
   Column,
   CreateDateColumn,
-  Entity,
+  Entity, OneToMany,
   PrimaryGeneratedColumn,
   Unique,
-} from 'typeorm';
+} from "typeorm";
+import { Exclude } from "class-transformer";
+import Review from "../../reviews/entities/reviews.entity";
+import { JoinColumn } from "typeorm/browser";
 
 @Entity('users')
 @Unique(['email'])
@@ -18,6 +21,7 @@ export default class Users {
   @Column()
   email: string;
   @Column({nullable: true})
+  @Exclude()
   password: string;
   @Column({ nullable: true, length: 2000 })
   token: string;
@@ -43,4 +47,10 @@ export default class Users {
   lastLogin: Date;
   @CreateDateColumn()
   createdAt: Date;
+
+  @OneToMany(type =>  Review, reviewUser => reviewUser.user, {
+    cascade: ['update']
+  })
+  @JoinColumn({name: 'id', referencedColumnName: 'userId'})
+  reviewUser: Review[];
 }
