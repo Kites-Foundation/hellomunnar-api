@@ -47,7 +47,7 @@ export class reviews1613742533820 implements MigrationInterface {
           {
             name: 'status',
             type: 'varchar',
-            default: "'PENDING'"
+            default: "'PENDING'",
           },
           {
             name: 'content',

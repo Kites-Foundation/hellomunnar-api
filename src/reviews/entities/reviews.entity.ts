@@ -8,7 +8,7 @@ import {
 import Users from '../../auth/entities/users.entity';
 
 @Entity('reviews')
-export default class Review {
+export class Review {
   @PrimaryGeneratedColumn()
   id: string;
 
