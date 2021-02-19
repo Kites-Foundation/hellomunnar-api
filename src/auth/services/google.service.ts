@@ -27,12 +27,12 @@ export class GoogleService {
       });
 
       if (user) {
-        user.token = uuidv4();
-        const payload = { uuid: user.token};
+        const token = uuidv4();
+        const payload = { userId: user.id, uuid: token, role: user.role || ''};
         return {
-          message: 'User Exists',
+          success: true,
           status: 200,
-          access_token: await this.jwtService.sign({uuid: payload}),
+          access_token: await this.jwtService.sign({ payload: payload}),
           user: user,
         };
       } else {
@@ -49,7 +49,7 @@ export class GoogleService {
           const saveUser = await this.userRepository.save(googleDto);
           const { ...savedUser } = saveUser;
 
-          const payload = { uuid: saveUser.token};
+          const payload = { userId: saveUser.id, token: saveUser.token, role: saveUser.role || ''};
           return {
             success: true,
             status: 200,
