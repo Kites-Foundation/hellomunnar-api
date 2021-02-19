@@ -5,13 +5,13 @@ export class CreateReviewDto {
     example: 'asdaly12hbldahbsdl21bekd',
     description: 'User Id (UUID)',
   })
-  userId: string;
+  userId: number;
 
   @ApiProperty({
     example: 'D-047',
     description: 'Destination Id',
   })
-  destinationId: string;
+  destinationId: number;
 
   @ApiProperty({
     example: 'Very GOod Experience',

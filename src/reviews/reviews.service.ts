@@ -32,7 +32,7 @@ export class ReviewsService {
     return this.reviewRepository.createReview(createReviewDto);
   }
 
-  async getReviewById(id: string): Promise<Review> {
+  async getReviewById(id: number): Promise<Review> {
     const foundReview = await this.reviewRepository.findOne({ id });
 
     if (!foundReview) {
@@ -41,7 +41,7 @@ export class ReviewsService {
     return foundReview;
   }
 
-  async updateReviewStatus(id: string, status: string, req: any): Promise<any> {
+  async updateReviewStatus(id: number, status: string, req: any): Promise<any> {
     const { user } = req;
     if (!user.id) {
       return;
@@ -57,7 +57,7 @@ export class ReviewsService {
       message: 'Reply sent successfully',
     };
   }
-  async deleteReview(id: string): Promise<any> {
+  async deleteReview(id: number): Promise<any> {
     const result = await this.reviewRepository.delete({ id });
 
     if (result.affected === 0) {

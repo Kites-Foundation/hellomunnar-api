@@ -1,8 +1,9 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import Users from '../entities/users.entity';
+import Users  from '../entities/users.entity';
 import { v4 as uuidv4 } from 'uuid';
+import { JwtService } from "@nestjs/jwt";
 
 @Injectable()
 export class GoogleService {
@@ -10,7 +11,9 @@ export class GoogleService {
   constructor(
     @InjectRepository(Users)
     private readonly userRepository: Repository<Users>,
+    private readonly jwtService: JwtService,
   ) {}
+
   async googleLogin(req): Promise<any> {
     try {
       if (!req.user) {
@@ -39,13 +42,15 @@ export class GoogleService {
           googleDto.uuid = uuidv4();
           googleDto.status = 'ACTIVE';
           googleDto.type = 'USER';
-          googleDto.token = req.user.accessToken;
+          googleDto.token = uuidv4();
           const saveUser = await this.userRepository.save(googleDto);
-
           const { ...savedUser } = saveUser;
+
+          const payload = { uuid: user.token};
           return {
-            message: 'User Retrieved from Google',
+            success: true,
             status: 200,
+            access_token: this.jwtService.sign(payload),
             user: savedUser,
           };
         }

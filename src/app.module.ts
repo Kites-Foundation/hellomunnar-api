@@ -9,6 +9,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { nestMailer } from './config/constants';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { ReviewsModule } from './reviews/reviews.module';
+import { RoleModule } from './role/role.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { ReviewsModule } from './reviews/reviews.module';
     watchmanModule,
     AuthModule,
     ReviewsModule,
+    RoleModule,
   ],
   controllers: [],
   providers: [

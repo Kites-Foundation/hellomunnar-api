@@ -18,13 +18,13 @@ import {
 } from '../dto';
 import { AuthService } from '../services';
 
+@ApiBearerAuth()
 @ApiTags('Auth Management')
 @Controller('api/v1/auth')
 export class AuthController {
   private logger = new Logger('Auth Controller');
   constructor(private readonly authService: AuthService) {}
 
-  @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   @Get('user')
   getUser(@Request() req: any) {
@@ -59,7 +59,6 @@ export class AuthController {
     return this.authService.resetPassword(body);
   }
 
-  @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   @Put('change-password')
   changePass(
