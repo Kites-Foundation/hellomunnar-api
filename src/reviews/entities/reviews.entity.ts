@@ -5,7 +5,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import  Users  from '../../auth/entities/users.entity';
+import Users from '../../auth/entities/users.entity';
 
 @Entity('reviews')
 export class Review {
@@ -15,13 +15,13 @@ export class Review {
   @Column()
   userId: number;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   destinationId: number;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   activityId: number;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   facilityId: number;
   @Column()
   title: string;

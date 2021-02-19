@@ -10,8 +10,9 @@ import { AppModule } from './app.module';
 import * as compression from 'compression';
 import { getConnectionManager } from 'typeorm';
 import * as rateLimit from 'express-rate-limit';
-const Sentry = require('@sentry/node')
-
+/*eslint-disable */
+const Sentry = require('@sentry/node');
+/*eslint-enable */
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
   tracesSampleRate: 1.0,

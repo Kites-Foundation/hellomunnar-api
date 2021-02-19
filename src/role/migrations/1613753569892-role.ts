@@ -1,4 +1,9 @@
-import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
 export class role1613753569892 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<any> {
@@ -66,7 +71,6 @@ export class role1613753569892 implements MigrationInterface {
         referencedTableName: 'users',
         onDelete: 'CASCADE',
       }),
-
     ]);
   }
 

@@ -28,7 +28,7 @@ export class AuthService {
 
   async getUser(email: any): Promise<any> {
     const user = await this.userRepository.findOne({
-      email: email.toLowerCase(),
+      email: email,
     });
     if (user) {
       delete user.password;

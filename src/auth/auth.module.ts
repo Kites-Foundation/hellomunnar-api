@@ -4,7 +4,7 @@ import { AuthController, GoogleController } from './controllers';
 import { GoogleStrategy, JwtStrategy, LocalStrategy } from './strategy';
 import { AuthService, GoogleService } from './services';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import  Users  from './entities/users.entity';
+import Users from './entities/users.entity';
 import { JwtModule } from '@nestjs/jwt';
 
 @Module({

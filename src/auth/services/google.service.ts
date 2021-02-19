@@ -1,9 +1,9 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import Users  from '../entities/users.entity';
+import Users from '../entities/users.entity';
 import { v4 as uuidv4 } from 'uuid';
-import { JwtService } from "@nestjs/jwt";
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class GoogleService {
@@ -28,11 +28,11 @@ export class GoogleService {
 
       if (user) {
         const token = uuidv4();
-        const payload = { userId: user.id, uuid: token, role: user.role || ''};
+        const payload = { email: user.email, id: user.id, uuid: token, role: user.role || '' };
         return {
           success: true,
           status: 200,
-          access_token: await this.jwtService.sign({ payload: payload}),
+          access_token: await this.jwtService.sign({ payload: payload }),
           user: user,
         };
       } else {
@@ -49,7 +49,12 @@ export class GoogleService {
           const saveUser = await this.userRepository.save(googleDto);
           const { ...savedUser } = saveUser;
 
-          const payload = { userId: saveUser.id, token: saveUser.token, role: saveUser.role || ''};
+          const payload = {
+            id: saveUser.id,
+            token: saveUser.token,
+            role: saveUser.role || '',
+            email: saveUser.email
+          };
           return {
             success: true,
             status: 200,

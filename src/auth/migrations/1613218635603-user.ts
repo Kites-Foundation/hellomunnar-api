@@ -70,7 +70,7 @@ export class user1613218635603 implements MigrationInterface {
           {
             name: 'role',
             type: 'varchar',
-            default: "'USER'"
+            default: "'USER'",
           },
           {
             name: 'type',
