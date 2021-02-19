@@ -17,7 +17,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { Review } from './entities/reviews.entity';
 
 @ApiBearerAuth()
-@UseGuards(AuthGuard('google'))
+@UseGuards(AuthGuard('jwt'))
 @ApiTags('Reviews')
 @Controller('/api/v1/reviews')
 export class ReviewsController {

@@ -1,11 +1,26 @@
-import { Body, Controller, Delete, Get, Logger, Param, ParseIntPipe, Patch, Post, Req } from "@nestjs/common";
-import { ApiTags } from "@nestjs/swagger";
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Logger,
+    Param,
+    ParseIntPipe,
+    Patch,
+    Post,
+    Req,
+    UseGuards,
+} from "@nestjs/common";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { RoleService } from "./role.service";
 import { RoleDto } from "./dto/role.dto";
+import { AuthGuard } from "@nestjs/passport";
 
 @ApiTags('Role Management')
 @Controller('api/v1/role')
 
+@ApiBearerAuth()
+@UseGuards(AuthGuard('jwt'))
 export class RoleController {
     private logger = new Logger('Role Controller');
     constructor(private readonly roleService: RoleService) {}

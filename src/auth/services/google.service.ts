@@ -25,10 +25,14 @@ export class GoogleService {
       const user = await this.userRepository.findOne({
         email: req.user.email,
       });
+
       if (user) {
+        user.token = uuidv4();
+        const payload = { uuid: user.token};
         return {
           message: 'User Exists',
           status: 200,
+          access_token: await this.jwtService.sign({uuid: payload}),
           user: user,
         };
       } else {
@@ -42,11 +46,10 @@ export class GoogleService {
           googleDto.uuid = uuidv4();
           googleDto.status = 'ACTIVE';
           googleDto.type = 'USER';
-          googleDto.token = uuidv4();
           const saveUser = await this.userRepository.save(googleDto);
           const { ...savedUser } = saveUser;
 
-          const payload = { uuid: user.token};
+          const payload = { uuid: saveUser.token};
           return {
             success: true,
             status: 200,
