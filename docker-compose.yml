@@ -14,6 +14,7 @@ services:
       - database
   database:
     image: postgres
+    restart: always
     environment:
       - POSTGRES_DB=hellomunnar
       - POSTGRES_USER=hellomunnar
@@ -22,6 +23,7 @@ services:
       - default
   cache:
     image: redis
+    restart: always
     networks:
         - default
 networks:
