@@ -28,11 +28,12 @@ export class GoogleService {
 
       if (user) {
         const token = uuidv4();
-        const payload = { email: user.email, id: user.id, uuid: token, role: user.role || '' };
+        const {email , id} = user;
+        const payload = { email, id };
         return {
           success: true,
           status: 200,
-          access_token: await this.jwtService.sign({ payload: payload }),
+          access_token: await this.jwtService.sign(payload),
           user: user,
         };
       } else {
@@ -49,12 +50,8 @@ export class GoogleService {
           const saveUser = await this.userRepository.save(googleDto);
           const { ...savedUser } = saveUser;
 
-          const payload = {
-            id: saveUser.id,
-            token: saveUser.token,
-            role: saveUser.role || '',
-            email: saveUser.email
-          };
+          const {email , id} = saveUser;
+          const payload = { email, id };
           return {
             success: true,
             status: 200,

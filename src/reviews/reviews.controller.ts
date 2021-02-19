@@ -7,9 +7,9 @@ import {
   Param,
   Post,
   Put,
-  Req,
+ Request,
   UseGuards,
-} from '@nestjs/common';
+} from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ReviewsService } from './reviews.service';
 import { CreateReviewDto, ReviewFilterDto } from './dto';
@@ -17,32 +17,33 @@ import { AuthGuard } from '@nestjs/passport';
 import { Review } from './entities/reviews.entity';
 
 @ApiBearerAuth()
-@UseGuards(AuthGuard('jwt'))
 @ApiTags('Reviews')
-@Controller('/api/v1/reviews')
+@Controller('api/v1/reviews')
 export class ReviewsController {
   private logger = new Logger('Review Controller');
   constructor(private reviewService: ReviewsService) {}
 
+  @UseGuards(AuthGuard('jwt'))
   @Get('reviews-stats')
-  getStats(@Req() req: any): Promise<any> {
-    this.logger.verbose('User Logged in', req.user);
+  getStats(@Request() req: any): Promise<any> {
     const userId = req.user.Id;
     return this.reviewService.getStats(userId);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Get('all-reviews')
   getAllReviews(
     @Body() reviewFilterDto: ReviewFilterDto,
-    @Req() req: any,
+    @Request() req: any,
   ): Promise<any> {
     this.logger.verbose('User Logged in', req.user);
     return this.reviewService.getAllReviews(reviewFilterDto);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Post('create-review')
   createReview(
-    @Req() req: any,
+    @Request() req: any,
     @Body() createReviewDto: CreateReviewDto,
   ): Promise<Review> {
     this.logger.verbose('User Logged in', req.user);
@@ -50,22 +51,25 @@ export class ReviewsController {
     return this.reviewService.createReview(createReviewDto);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Get('get-review/:id')
   getReviewById(@Param('id') id: number): Promise<Review> {
     return this.reviewService.getReviewById(id);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Put('update-status/:id')
   updateReviewStatus(
     @Param('id') id: number,
     @Body('status') status: string,
-    @Req() req: any,
+    @Request() req: any,
   ) {
     return this.reviewService.updateReviewStatus(id, status, req);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Delete('delete/:id')
-  destroyReview(@Req() req: any, @Param('id') id: number) {
+  destroyReview(@Request() req: any, @Param('id') id: number) {
     this.logger.verbose(`Review with ${id} deleted`);
     return this.reviewService.deleteReview(id);
   }

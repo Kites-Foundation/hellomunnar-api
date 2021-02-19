@@ -1,5 +1,5 @@
 import { ApiTags } from '@nestjs/swagger';
-import { Controller, Get, Logger, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Logger, Request, UseGuards } from "@nestjs/common";
 import { AuthGuard } from '@nestjs/passport';
 import { GoogleService } from '../services';
 
@@ -11,12 +11,12 @@ export class GoogleController {
   @Get()
   @UseGuards(AuthGuard('google'))
   /*eslint-disable */
-  async googleAuth(@Req() req) {}
+  async googleAuth(@Request() req) {}
   /*eslint-enable */
 
   @Get('redirect')
   @UseGuards(AuthGuard('google'))
-  googleAuthRedirect(@Req() req) {
+  googleAuthRedirect(@Request() req) {
     this.logger.verbose(`User Logged in ${req.user.email} `);
     return this.googleService.googleLogin(req);
   }
