@@ -5,23 +5,23 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export class reviews1613742533820 implements MigrationInterface {
+export class role1613753569892 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<any> {
     await queryRunner.createTable(
       new Table({
-        name: 'reviews',
+        name: 'role',
         columns: [
           {
             name: 'id',
             type: 'bigint',
-            isPrimary: true,
             isGenerated: true,
+            isPrimary: true,
             generationStrategy: 'increment',
           },
           {
             name: 'userId',
             type: 'bigint',
-            isNullable: false,
+            isNullable: true,
           },
           {
             name: 'destinationId',
@@ -34,41 +34,20 @@ export class reviews1613742533820 implements MigrationInterface {
             isNullable: true,
           },
           {
-            name: 'activityId',
+            name: 'typeId',
             type: 'bigint',
             isNullable: true,
           },
           {
-            name: 'title',
+            name: 'role',
             type: 'varchar',
             isNullable: false,
           },
           {
-            name: 'rating',
+            name: 'createdBy',
             type: 'bigint',
-            isNullable: false,
           },
-          {
-            name: 'date',
-            type: 'timestamp',
-            default: 'CURRENT_TIMESTAMP',
-            isNullable: false,
-          },
-          {
-            name: 'status',
-            type: 'varchar',
-            default: "'PENDING'",
-          },
-          {
-            name: 'content',
-            type: 'varchar',
-            isNullable: true,
-          },
-          {
-            name: 'imageUrls',
-            type: 'jsonb',
-            isNullable: true,
-          },
+
           {
             name: 'createdAt',
             type: 'timestamp',
@@ -79,25 +58,23 @@ export class reviews1613742533820 implements MigrationInterface {
       }),
       true,
     );
-
-    await queryRunner.createForeignKey(
-      'reviews',
+    await queryRunner.createForeignKeys('role', [
       new TableForeignKey({
         columnNames: ['userId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'users',
         onDelete: 'CASCADE',
       }),
-    );
+      new TableForeignKey({
+        columnNames: ['createdBy'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'users',
+        onDelete: 'CASCADE',
+      }),
+    ]);
   }
 
   public async down(queryRunner: QueryRunner): Promise<any> {
-    const table = await queryRunner.getTable('reviews');
-    const createdByForeignKey = table.foreignKeys.find(
-      (fk) => fk.columnNames.indexOf('userId') !== -1,
-    );
-    await queryRunner.dropForeignKey('reviews', createdByForeignKey);
-    await queryRunner.dropColumn('reviews', 'userId');
-    await queryRunner.dropTable('reviews');
+    await queryRunner.query(`DROP TABLE "role"`);
   }
 }

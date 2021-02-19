@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import Users from '../entities/users.entity';
 import { v4 as uuidv4 } from 'uuid';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class GoogleService {
@@ -10,7 +11,9 @@ export class GoogleService {
   constructor(
     @InjectRepository(Users)
     private readonly userRepository: Repository<Users>,
+    private readonly jwtService: JwtService,
   ) {}
+
   async googleLogin(req): Promise<any> {
     try {
       if (!req.user) {
@@ -22,10 +25,14 @@ export class GoogleService {
       const user = await this.userRepository.findOne({
         email: req.user.email,
       });
+
       if (user) {
+        const token = uuidv4();
+        const payload = { email: user.email, id: user.id, uuid: token, role: user.role || '' };
         return {
-          message: 'User Exists',
+          success: true,
           status: 200,
+          access_token: await this.jwtService.sign({ payload: payload }),
           user: user,
         };
       } else {
@@ -39,13 +46,19 @@ export class GoogleService {
           googleDto.uuid = uuidv4();
           googleDto.status = 'ACTIVE';
           googleDto.type = 'USER';
-          googleDto.token = req.user.accessToken;
           const saveUser = await this.userRepository.save(googleDto);
-
           const { ...savedUser } = saveUser;
+
+          const payload = {
+            id: saveUser.id,
+            token: saveUser.token,
+            role: saveUser.role || '',
+            email: saveUser.email
+          };
           return {
-            message: 'User Retrieved from Google',
+            success: true,
             status: 200,
+            access_token: this.jwtService.sign(payload),
             user: savedUser,
           };
         }

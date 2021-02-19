@@ -10,13 +10,14 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ReviewsService } from './reviews.service';
 import { CreateReviewDto, ReviewFilterDto } from './dto';
 import { AuthGuard } from '@nestjs/passport';
 import { Review } from './entities/reviews.entity';
 
-@UseGuards(AuthGuard('google'))
+@ApiBearerAuth()
+@UseGuards(AuthGuard('jwt'))
 @ApiTags('Reviews')
 @Controller('/api/v1/reviews')
 export class ReviewsController {
@@ -50,13 +51,13 @@ export class ReviewsController {
   }
 
   @Get('get-review/:id')
-  getReviewById(@Param('id') id: string): Promise<Review> {
+  getReviewById(@Param('id') id: number): Promise<Review> {
     return this.reviewService.getReviewById(id);
   }
 
   @Put('update-status/:id')
   updateReviewStatus(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body('status') status: string,
     @Req() req: any,
   ) {
@@ -64,7 +65,7 @@ export class ReviewsController {
   }
 
   @Delete('delete/:id')
-  destroyReview(@Req() req: any, @Param('id') id: string) {
+  destroyReview(@Req() req: any, @Param('id') id: number) {
     this.logger.verbose(`Review with ${id} deleted`);
     return this.reviewService.deleteReview(id);
   }

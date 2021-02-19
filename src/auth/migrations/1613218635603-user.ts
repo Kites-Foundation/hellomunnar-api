@@ -8,10 +8,10 @@ export class user1613218635603 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'uuid',
+            type: 'bigint',
             isPrimary: true,
             isGenerated: true,
-            generationStrategy: 'uuid',
+            generationStrategy: 'increment',
           },
           {
             name: 'name',
@@ -66,6 +66,11 @@ export class user1613218635603 implements MigrationInterface {
             name: 'status',
             type: 'varchar',
             default: "'ACTIVE'",
+          },
+          {
+            name: 'role',
+            type: 'varchar',
+            default: "'USER'",
           },
           {
             name: 'type',

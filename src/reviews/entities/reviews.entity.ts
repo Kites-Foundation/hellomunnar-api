@@ -10,14 +10,19 @@ import Users from '../../auth/entities/users.entity';
 @Entity('reviews')
 export class Review {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
   @Column()
-  userId: string;
+  userId: number;
 
-  @Column()
-  destinationId: string;
+  @Column({ nullable: true })
+  destinationId: number;
 
+  @Column({ nullable: true })
+  activityId: number;
+
+  @Column({ nullable: true })
+  facilityId: number;
   @Column()
   title: string;
 

@@ -7,13 +7,13 @@ import { Repository } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 import { envHost } from '../../config/constants';
 import { ChangePasswordDto } from '../dto';
-import User from '../entities/users.entity';
+import Users from '../entities/users.entity';
 
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
+    @InjectRepository(Users)
+    private readonly userRepository: Repository<Users>,
     private readonly jwtService: JwtService,
     private readonly mailerService: MailerService,
   ) {}
@@ -28,7 +28,7 @@ export class AuthService {
 
   async getUser(email: any): Promise<any> {
     const user = await this.userRepository.findOne({
-      email: email.toLowerCase(),
+      email: email,
     });
     if (user) {
       delete user.password;
@@ -237,7 +237,7 @@ export class AuthService {
     };
   }
 
-  async changePassword(user: User, data: ChangePasswordDto): Promise<any> {
+  async changePassword(user: Users, data: ChangePasswordDto): Promise<any> {
     const id = user.id;
     const found = await this.userRepository.findOne({ id });
     const match = await bcrypt.compare(data.currentPassword, found.password);

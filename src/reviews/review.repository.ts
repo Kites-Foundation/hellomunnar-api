@@ -49,9 +49,7 @@ export class ReviewRepository extends Repository<Review> {
       };
     } catch (e) {
       this.logger.error(
-        `Failed to get reviews with filter: ${JSON.stringify(
-          reviewFilterDto,
-        )}`,
+        `Failed to get reviews with filter: ${JSON.stringify(reviewFilterDto)}`,
         e.stack,
       );
       throw new InternalServerErrorException();

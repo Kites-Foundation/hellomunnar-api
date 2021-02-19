@@ -5,16 +5,16 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
   Unique,
+  JoinColumn,
 } from 'typeorm';
-import { Exclude } from 'class-transformer';
 import { Review } from '../../reviews/entities/reviews.entity';
-import { JoinColumn } from 'typeorm/browser';
+import { Role } from '../../role/entities/role.entity';
 
 @Entity('users')
 @Unique(['email'])
 export default class Users {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
   @Column()
   name: string;
   @Column()
@@ -22,7 +22,6 @@ export default class Users {
   @Column()
   email: string;
   @Column({ nullable: true })
-  @Exclude()
   password: string;
   @Column({ nullable: true, length: 2000 })
   token: string;
@@ -54,4 +53,10 @@ export default class Users {
   })
   @JoinColumn({ name: 'id', referencedColumnName: 'userId' })
   reviewUser: Review[];
+
+  @OneToMany((type) => Role, (role) => role.user, {
+    cascade: ['update'],
+  })
+  @JoinColumn({ name: 'id' })
+  role: Role[];
 }
