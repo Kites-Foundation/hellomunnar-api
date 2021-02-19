@@ -7,7 +7,7 @@ import {
   Unique,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
-import Review from '../../reviews/entities/reviews.entity';
+import { Review } from '../../reviews/entities/reviews.entity';
 import { JoinColumn } from 'typeorm/browser';
 
 @Entity('users')
