@@ -1,37 +1,42 @@
 import {
-    Column,
-    Entity, JoinColumn, ManyToOne,
-    PrimaryGeneratedColumn,
-} from "typeorm";
-import Users from "../../auth/entities/users.entity";
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import Users from '../../auth/entities/users.entity';
 
 @Entity('reviews')
 export default class Review {
-    @PrimaryGeneratedColumn()
-    id: string;
+  @PrimaryGeneratedColumn()
+  id: string;
 
-    @Column()
-    userId: string;
+  @Column()
+  userId: string;
 
-    @Column()
-    destinationId: string;
+  @Column()
+  destinationId: string;
 
-    @Column()
-    title: string;
+  @Column()
+  title: string;
 
-    @Column()
-    rating: number;
+  @Column()
+  rating: number;
 
-    @Column()
-    date: Date;
+  @Column()
+  date: Date;
 
-    @Column({length: 2000, nullable: true})
-    content: string;
+  @Column()
+  status: string;
 
-    @Column({ type: 'jsonb', nullable: true })
-    imageUrls: any;
+  @Column({ length: 2000, nullable: true })
+  content: string;
 
-    @ManyToOne(type => Users, user => user)
-    @JoinColumn({name: 'userId', referencedColumnName: 'id'})
-    user: Users;
+  @Column({ type: 'jsonb', nullable: true })
+  imageUrls: any;
+
+  @ManyToOne((type) => Users, (user) => user)
+  @JoinColumn({ name: 'userId', referencedColumnName: 'id' })
+  user: Users;
 }

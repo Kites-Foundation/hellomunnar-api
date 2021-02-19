@@ -201,15 +201,14 @@ export class AuthService {
     if (user) {
       if (data.password === data.confirm) {
         const match = await bcrypt.compare(data.confirm, user.password);
-        if(match)
-        {
+        if (match) {
           return {
             success: false,
             message: 'error',
             data: {
               confirm: 'Please try a different password',
-            }
-          }
+            },
+          };
         }
         user.password = await bcrypt.hash(data.password, 10);
         user.token = null;
