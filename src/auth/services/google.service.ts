@@ -27,9 +27,10 @@ export class GoogleService {
       });
 
       if (user) {
-        const token = uuidv4();
         const { email, id } = user;
         const payload = { email, id };
+        delete user.password;
+        delete user.token;
         return {
           success: true,
           status: 200,
@@ -52,6 +53,9 @@ export class GoogleService {
 
           const { email, id } = saveUser;
           const payload = { email, id };
+          delete savedUser.password;
+          delete savedUser.token;
+
           return {
             success: true,
             status: 200,

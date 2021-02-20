@@ -24,7 +24,7 @@ export class ReviewRepository extends Repository<Review> {
     query
       .leftJoin('reviews.user', 'user')
         .leftJoin('user.role', 'roles')
-      .select(['reviews', 'reviews.user','user.email', 'user.id', 'roles.id', 'roles.role'])
+      .select(['reviews', 'reviews.user','user.email','user.googleImageUrl' ,'user.id', 'roles.id', 'roles.role'])
       .orderBy('reviews.date', 'DESC');
 
     if (userId) {
