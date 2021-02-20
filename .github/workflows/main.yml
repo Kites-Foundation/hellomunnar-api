@@ -76,6 +76,8 @@ jobs:
             docker run -p 3601:3600 --name munnar1 --env-file /home/ubuntu/.env.list -d IMAGE_ID:latest
             docker ps
             echo "Latest Image Deployed"
+            sudo systemctl restart nginx
+            echo "Nginx Restarted"
 
 
 
