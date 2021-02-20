@@ -12,7 +12,6 @@ export class ReviewsService {
   ) {}
 
   async getStats(userId: number): Promise<any> {
-
     if (!userId) {
       return;
     }

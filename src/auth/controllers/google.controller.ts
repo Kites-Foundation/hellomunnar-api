@@ -1,5 +1,5 @@
 import { ApiTags } from '@nestjs/swagger';
-import { Controller, Get, Logger, Request, UseGuards } from "@nestjs/common";
+import { Controller, Get, Logger, Request, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { GoogleService } from '../services';
 

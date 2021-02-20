@@ -32,7 +32,10 @@ export class RoleController {
   }
 
   @Get('/:userId')
-  getUserRole(@Param('userId') userId: number, @Request() req: any): Promise<any> {
+  getUserRole(
+    @Param('userId') userId: number,
+    @Request() req: any,
+  ): Promise<any> {
     this.logger.verbose('Api Triggered', req.user.email);
     return this.roleService.getUserRole(userId);
   }
@@ -54,7 +57,8 @@ export class RoleController {
   @Patch('/:id')
   updateRole(
     @Param('id', ParseIntPipe) id: number,
-    @Body() body: RoleDto,@Request() req: any
+    @Body() body: RoleDto,
+    @Request() req: any,
   ): Promise<any> {
     this.logger.verbose('Api Triggered', req.user.email);
     this.logger.verbose('updating a role');

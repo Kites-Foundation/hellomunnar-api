@@ -28,7 +28,7 @@ export class GoogleService {
 
       if (user) {
         const token = uuidv4();
-        const {email , id} = user;
+        const { email, id } = user;
         const payload = { email, id };
         return {
           success: true,
@@ -50,7 +50,7 @@ export class GoogleService {
           const saveUser = await this.userRepository.save(googleDto);
           const { ...savedUser } = saveUser;
 
-          const {email , id} = saveUser;
+          const { email, id } = saveUser;
           const payload = { email, id };
           return {
             success: true,
