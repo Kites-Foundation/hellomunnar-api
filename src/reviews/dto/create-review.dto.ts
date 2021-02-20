@@ -12,25 +12,25 @@ export class CreateReviewDto {
     example: '123',
     description: 'Destination Id',
   })
-  destinationId: number;
+  destinationId: string;
 
   @ApiProperty({
     example: '123',
     description: 'Destination Id',
   })
   @IsOptional()
-  facilityId: number;
+  facilityId: string;
 
   @ApiProperty({
     example: '123',
     description: 'Destination Id',
   })
   @IsOptional()
-  activityId: number;
+  activityId: string;
 
   @ApiProperty({ example: '123' })
   @IsOptional()
-  typeId: number;
+  typeId: string;
 
 
   @ApiProperty({

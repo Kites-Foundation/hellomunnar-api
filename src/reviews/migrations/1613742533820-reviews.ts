@@ -25,17 +25,17 @@ export class reviews1613742533820 implements MigrationInterface {
           },
           {
             name: 'destinationId',
-            type: 'bigint',
+            type: 'varchar',
             isNullable: true,
           },
           {
             name: 'facilityId',
-            type: 'bigint',
+            type: 'varchar',
             isNullable: true,
           },
           {
             name: 'activityId',
-            type: 'bigint',
+            type: 'varchar',
             isNullable: true,
           },
           {
