@@ -1,7 +1,8 @@
 name: Hello Munnar
 on:
-  tags:
-    - v*
+  create:
+    tags:
+      - v*
 env:
   IMAGE_NAME: hellomunnar-api
 
