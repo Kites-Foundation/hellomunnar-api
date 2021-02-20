@@ -27,6 +27,7 @@ export class ReviewsController {
   @Get('reviews-stats')
   getStats(@Req() req: any): Promise<any> {
     const userId = req.user.id;
+    this.logger.verbose('Api Triggered', req.user.email);
     return this.reviewService.getStats(userId);
   }
 
@@ -35,7 +36,7 @@ export class ReviewsController {
     @Body() reviewFilterDto: ReviewFilterDto,
     @Req() req: any,
   ): Promise<any> {
-    this.logger.verbose('User Logged in', req);
+    this.logger.verbose('Api Triggered', req.user.email);
     return this.reviewService.getAllReviews(reviewFilterDto);
   }
 
@@ -45,11 +46,13 @@ export class ReviewsController {
     @Body() createReviewDto: CreateReviewDto,
   ): Promise<Review> {
     createReviewDto.userId = req.user.id;
+    this.logger.verbose('Api Triggered', req.user.email);
     return this.reviewService.createReview(createReviewDto);
   }
 
   @Get('get-review/:id')
-  getReviewById(@Param('id') id: number): Promise<Review> {
+  getReviewById(@Param('id') id: number, @Req() req: any): Promise<Review> {
+    this.logger.verbose('Api Triggered', req.user.email);
     return this.reviewService.getReviewById(id);
   }
 
@@ -59,11 +62,13 @@ export class ReviewsController {
     @Body('status') status: string,
     @Request() req: any,
   ) {
+    this.logger.verbose('Api Triggered', req.user.email);
     return this.reviewService.updateReviewStatus(id, status, req);
   }
 
   @Delete('delete/:id')
   destroyReview(@Request() req: any, @Param('id') id: number) {
+    this.logger.verbose('Api Triggered', req.user.email);
     this.logger.verbose(`Review with ${id} deleted`);
     return this.reviewService.deleteReview(id);
   }

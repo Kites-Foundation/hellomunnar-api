@@ -27,22 +27,26 @@ export class RoleController {
   @Get('all-roles')
   getAllRoles(@Request() req: any) {
     this.logger.verbose(`retrieving all roles`);
+    this.logger.verbose('Api Triggered', req.user.email);
     return this.roleService.getAllRoles();
   }
 
   @Get('/:userId')
-  getUserRole(@Param('userId') userId: number): Promise<any> {
+  getUserRole(@Param('userId') userId: number, @Request() req: any): Promise<any> {
+    this.logger.verbose('Api Triggered', req.user.email);
     return this.roleService.getUserRole(userId);
   }
 
   @Post('add-role')
-  addRole(@Body() roleDto: RoleDto) {
+  addRole(@Body() roleDto: RoleDto, @Request() req: any) {
     this.logger.verbose('adding new role');
+    this.logger.verbose('Api Triggered', req.user.email);
     return this.roleService.addRole(roleDto);
   }
 
   @Delete('/:id')
-  deleteRole(@Param('id') id: number): Promise<any> {
+  deleteRole(@Param('id') id: number, @Request() req: any): Promise<any> {
+    this.logger.verbose('Api Triggered', req.user.email);
     this.logger.verbose('deleting a role');
     return this.roleService.deleteRole(id);
   }
@@ -50,8 +54,9 @@ export class RoleController {
   @Patch('/:id')
   updateRole(
     @Param('id', ParseIntPipe) id: number,
-    @Body() body: RoleDto,
+    @Body() body: RoleDto,@Request() req: any
   ): Promise<any> {
+    this.logger.verbose('Api Triggered', req.user.email);
     this.logger.verbose('updating a role');
     return this.roleService.updateRole(id, body);
   }

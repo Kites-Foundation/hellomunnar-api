@@ -28,6 +28,7 @@ export class AuthController {
   @UseGuards(AuthGuard('jwt'))
   @Get('user')
   getUser(@Request() req: any) {
+    this.logger.verbose('Api Triggered', req.user.email);
     return this.authService.getUser(req.user.email);
   }
 
