@@ -23,8 +23,7 @@ export class ReviewRepository extends Repository<Review> {
     const query = this.createQueryBuilder('reviews');
     query
       .leftJoin('reviews.user', 'user')
-        .leftJoin('user.role', 'roles')
-      .select(['reviews', 'reviews.user','user.email','user.googleImageUrl' ,'user.id', 'roles.id', 'roles.role'])
+      .select(['reviews', 'reviews.user','user.email','user.googleImageUrl' ,'user.id', 'user.role'])
       .orderBy('reviews.date', 'DESC');
 
     if (userId) {
@@ -83,6 +82,7 @@ export class ReviewRepository extends Repository<Review> {
       title,
       rating,
       status,
+        facilityId
     } = createReviewDto;
     const review = new Review();
 
@@ -92,6 +92,7 @@ export class ReviewRepository extends Repository<Review> {
     review.typeId = typeId;
     review.activityId = activityId;
     review.userId = userId;
+    review.facilityId = facilityId;
     review.title = title;
     review.rating = rating;
     review.status = status;

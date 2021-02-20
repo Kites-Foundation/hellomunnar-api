@@ -16,13 +16,13 @@ export class Review {
   userId: number;
 
   @Column({ nullable: true })
-  destinationId: number;
+  destinationId: string;
 
   @Column({ nullable: true })
-  activityId: number;
+  activityId: string;
 
   @Column({ nullable: true })
-  facilityId: number;
+  facilityId: string;
 
   @Column()
   title: string;
@@ -34,7 +34,7 @@ export class Review {
   date: Date;
 
   @Column({nullable: true})
-  typeId: number;
+  typeId: string;
 
   @Column()
   status: string;

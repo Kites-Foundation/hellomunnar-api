@@ -8,7 +8,6 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { Review } from '../../reviews/entities/reviews.entity';
-import { Role } from '../../role/entities/role.entity';
 
 @Entity('users')
 @Unique(['email'])
@@ -17,6 +16,10 @@ export default class Users {
   id: number;
   @Column()
   name: string;
+
+  @Column()
+  role: string;
+
   @Column()
   userName: string;
   @Column()
@@ -53,10 +56,4 @@ export default class Users {
   })
   @JoinColumn({ name: 'id', referencedColumnName: 'userId' })
   reviewUser: Review[];
-
-  @OneToMany((type) => Role, (role) => role.user, {
-    cascade: ['update'],
-  })
-  @JoinColumn({ name: 'id' })
-  role: Role[];
 }
