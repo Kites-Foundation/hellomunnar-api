@@ -1,6 +1,5 @@
 name: Hello Munnar
 on:
-  push:
     tags:
       - v*
 
