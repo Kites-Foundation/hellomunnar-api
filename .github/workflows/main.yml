@@ -62,8 +62,8 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            whoami
             IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
+            IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
             echo $IMAGE_ID
             echo IMAGE_ID=$IMAGE_ID
             docker stop munnar munnar1
