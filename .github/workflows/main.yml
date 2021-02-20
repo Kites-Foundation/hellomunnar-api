@@ -1,7 +1,4 @@
 name: Hello Munnar
-environment:
-  name: Production
-  url: https://api.hellomunnar.in
 on:
   create:
     tags:
