@@ -11,9 +11,9 @@ export class ReviewsService {
     private reviewRepository: ReviewRepository,
   ) {}
 
-  async getStats(req: any): Promise<any> {
-    const { user } = req;
-    if (!user.Id) {
+  async getStats(userId: number): Promise<any> {
+
+    if (!userId) {
       return;
     }
     let query = this.reviewRepository.createQueryBuilder('reviews');

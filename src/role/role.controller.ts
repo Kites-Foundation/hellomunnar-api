@@ -3,12 +3,12 @@ import {
   Controller,
   Delete,
   Get,
+  Request,
   Logger,
   Param,
   ParseIntPipe,
   Patch,
   Post,
-  Req,
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
@@ -25,7 +25,7 @@ export class RoleController {
   constructor(private readonly roleService: RoleService) {}
 
   @Get('all-roles')
-  getAllRoles(@Req() req: any) {
+  getAllRoles(@Request() req: any) {
     this.logger.verbose(`retrieving all roles`);
     return this.roleService.getAllRoles();
   }

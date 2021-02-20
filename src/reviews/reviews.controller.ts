@@ -36,7 +36,7 @@ export class ReviewsController {
     @Body() reviewFilterDto: ReviewFilterDto,
     @Request() req: any,
   ): Promise<any> {
-    this.logger.verbose('User Logged in', req.user);
+    this.logger.verbose('User Logged in', req.user.id);
     return this.reviewService.getAllReviews(reviewFilterDto);
   }
 
