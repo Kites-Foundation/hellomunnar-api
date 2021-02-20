@@ -63,8 +63,8 @@ export class ReviewRepository extends Repository<Review> {
       destinationId,
       imageUrls,
       title,
-        rating,
-        status
+      rating,
+      status,
     } = createReviewDto;
     const review = new Review();
 

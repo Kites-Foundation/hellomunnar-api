@@ -54,7 +54,7 @@ export class ReviewsService {
     return {
       success: true,
       message: 'Status Updated Successfully',
-      review: review
+      review: review,
     };
   }
   async deleteReview(id: number): Promise<any> {
