@@ -6,8 +6,8 @@ import {
   Logger,
   Param,
   Post,
-  Put,
- Request,
+  Put, Req,
+  Request,
   UseGuards,
 } from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
@@ -17,47 +17,42 @@ import { AuthGuard } from '@nestjs/passport';
 import { Review } from './entities/reviews.entity';
 
 @ApiBearerAuth()
+@UseGuards(AuthGuard('jwt'))
 @ApiTags('Reviews')
 @Controller('api/v1/reviews')
 export class ReviewsController {
   private logger = new Logger('Review Controller');
   constructor(private reviewService: ReviewsService) {}
 
-  @UseGuards(AuthGuard('jwt'))
   @Get('reviews-stats')
-  getStats(@Request() req: any): Promise<any> {
-    const userId = req.user.Id;
+  getStats(@Req() req: any): Promise<any> {
+    const userId = req.user.id;
     return this.reviewService.getStats(userId);
   }
 
-  @UseGuards(AuthGuard('jwt'))
   @Get('all-reviews')
   getAllReviews(
     @Body() reviewFilterDto: ReviewFilterDto,
-    @Request() req: any,
+    @Req() req: any,
   ): Promise<any> {
-    this.logger.verbose('User Logged in', req.user.id);
+    this.logger.verbose('User Logged in', req);
     return this.reviewService.getAllReviews(reviewFilterDto);
   }
 
-  @UseGuards(AuthGuard('jwt'))
   @Post('create-review')
   createReview(
     @Request() req: any,
     @Body() createReviewDto: CreateReviewDto,
   ): Promise<Review> {
-    this.logger.verbose('User Logged in', req.user);
     createReviewDto.userId = req.user.id;
     return this.reviewService.createReview(createReviewDto);
   }
 
-  @UseGuards(AuthGuard('jwt'))
   @Get('get-review/:id')
   getReviewById(@Param('id') id: number): Promise<Review> {
     return this.reviewService.getReviewById(id);
   }
 
-  @UseGuards(AuthGuard('jwt'))
   @Put('update-status/:id')
   updateReviewStatus(
     @Param('id') id: number,
@@ -67,7 +62,6 @@ export class ReviewsController {
     return this.reviewService.updateReviewStatus(id, status, req);
   }
 
-  @UseGuards(AuthGuard('jwt'))
   @Delete('delete/:id')
   destroyReview(@Request() req: any, @Param('id') id: number) {
     this.logger.verbose(`Review with ${id} deleted`);
