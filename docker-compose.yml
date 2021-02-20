@@ -1,0 +1,30 @@
+version: "3.1"
+services:
+  backend:
+    build: .
+    ports:
+      - "3600:3600"
+    restart: always
+    env_file:
+      - ".env.docker"
+    networks:
+      - default
+    depends_on: 
+      - cache
+      - database
+  database:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_DB=hellomunnar
+      - POSTGRES_USER=hellomunnar
+      - POSTGRES_PASSWORD=hellomunnar
+    networks:
+      - default
+  cache:
+    image: redis
+    restart: always
+    networks:
+        - default
+networks:
+  default:

@@ -10,6 +10,10 @@
 $ npm install
 ```
 
+### Creating a  migration File
+```
+typeorm migration:create -n componentName
+```
 ## Running the app
 
 ```bash

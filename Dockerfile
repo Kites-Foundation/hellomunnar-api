@@ -12,5 +12,5 @@ WORKDIR /usr/src/app
 COPY . ./
 COPY --from=development /usr/src/app/dist ./dist
 COPY --from=development /usr/src/app/node_modules ./node_modules
-EXPOSE 9999
+EXPOSE 3600
 CMD ["node", "dist/main"]
