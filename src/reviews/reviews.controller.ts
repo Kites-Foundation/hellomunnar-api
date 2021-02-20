@@ -6,11 +6,11 @@ import {
   Logger,
   Param,
   Post,
-  Put,
+  Put, Query,
   Req,
   Request,
   UseGuards,
-} from '@nestjs/common';
+} from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ReviewsService } from './reviews.service';
 import { CreateReviewDto, ReviewFilterDto } from './dto';
@@ -34,7 +34,7 @@ export class ReviewsController {
 
   @Get('all-reviews')
   getAllReviews(
-    @Body() reviewFilterDto: ReviewFilterDto,
+    @Query() reviewFilterDto: ReviewFilterDto,
     @Req() req: any,
   ): Promise<any> {
     this.logger.verbose('Api Triggered', req.user.email);
