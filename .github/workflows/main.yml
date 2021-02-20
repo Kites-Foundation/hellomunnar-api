@@ -1,10 +1,7 @@
 name: Hello Munnar
 on:
-    tags:
-      - v*
-
-  pull_request:
-
+  tags:
+    - v*
 env:
   IMAGE_NAME: hellomunnar-api
 
