@@ -75,6 +75,6 @@ export class ReviewsController {
   async destroyReview(@Request() req: any, @Param('id') id: number) {
     this.logger.verbose('delete/:id Api Triggered', req.user.email);
     this.logger.verbose(`Review with ${id} deleted`);
-    return this.reviewService.deleteReview(id, req);
+    return this.reviewService.deleteReview(id);
   }
 }
