@@ -37,4 +37,8 @@ export class ReviewFilterDto {
   @ApiProperty({ example: null })
   @IsOptional()
   limit: number;
+
+  @ApiProperty({ example: null })
+  @IsOptional()
+  date: Date;
 }
