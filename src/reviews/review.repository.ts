@@ -73,6 +73,8 @@ export class ReviewRepository extends Repository<Review> {
       userId,
       content,
       destinationId,
+        activityId,
+        typeId,
       imageUrls,
       title,
       rating,
@@ -83,6 +85,8 @@ export class ReviewRepository extends Repository<Review> {
     review.imageUrls = imageUrls;
     review.content = content;
     review.destinationId = destinationId;
+    review.typeId = typeId;
+    review.activityId = activityId;
     review.userId = userId;
     review.title = title;
     review.rating = rating;
