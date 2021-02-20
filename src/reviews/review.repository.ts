@@ -13,17 +13,30 @@ export class ReviewRepository extends Repository<Review> {
       status,
       destinationId,
       limit,
+        facilityId,
+        activityId,
+        typeId,
       offset,
       page,
     } = reviewFilterDto;
     const query = this.createQueryBuilder('reviews');
     query
       .leftJoin('reviews.user', 'user')
-      .select(['reviews', 'reviews.user', 'user', 'user.id'])
+        .leftJoin('user.role', 'roles')
+      .select(['reviews', 'reviews.user','user.email', 'user.id', 'roles.id', 'roles.role'])
       .orderBy('reviews.date', 'DESC');
 
     if (userId) {
       query.andWhere('reviews.userId = :userId', { userId });
+    }
+    if (facilityId) {
+      query.andWhere('reviews.facilityId = :facilityId', { facilityId });
+    }
+    if (activityId) {
+      query.andWhere('reviews.activityId = :activityId', { activityId });
+    }
+    if (typeId) {
+      query.andWhere('reviews.typeId = :typeId', { typeId });
     }
 
     if (destinationId) {
@@ -61,6 +74,8 @@ export class ReviewRepository extends Repository<Review> {
       userId,
       content,
       destinationId,
+        activityId,
+        typeId,
       imageUrls,
       title,
       rating,
@@ -71,6 +86,8 @@ export class ReviewRepository extends Repository<Review> {
     review.imageUrls = imageUrls;
     review.content = content;
     review.destinationId = destinationId;
+    review.typeId = typeId;
+    review.activityId = activityId;
     review.userId = userId;
     review.title = title;
     review.rating = rating;

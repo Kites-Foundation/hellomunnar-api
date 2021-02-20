@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IsOptional } from "class-validator";
 
 export class CreateReviewDto {
   @ApiProperty({
@@ -8,10 +9,29 @@ export class CreateReviewDto {
   userId: number;
 
   @ApiProperty({
-    example: 'D-047',
+    example: '123',
     description: 'Destination Id',
   })
   destinationId: number;
+
+  @ApiProperty({
+    example: '123',
+    description: 'Destination Id',
+  })
+  @IsOptional()
+  facilityId: number;
+
+  @ApiProperty({
+    example: '123',
+    description: 'Destination Id',
+  })
+  @IsOptional()
+  activityId: number;
+
+  @ApiProperty({ example: '123' })
+  @IsOptional()
+  typeId: number;
+
 
   @ApiProperty({
     example: 'Very GOod Experience',
