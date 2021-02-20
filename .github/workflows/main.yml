@@ -1,4 +1,7 @@
 name: Hello Munnar
+environment:
+  name: Production
+  url: https://api.hellomunnar.in
 on:
   create:
     tags:
@@ -50,3 +53,32 @@ jobs:
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker tag $IMAGE_NAME $IMAGE_ID:latest
           docker push $IMAGE_ID:$VERSION
+  deploy:
+    needs: push
+    steps:
+      - name: Deploy Docker
+      - uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            whoami
+            IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
+            echo $IMAGE_ID
+            echo IMAGE_ID=$IMAGE_ID
+            docker stop munnar munnar1
+            docker rm munnar munnar1
+            docker pull $IMAGE_ID:latest
+            docker images
+            docker run -p 3600:3600 --name munnar --env-file /home/ubuntu/.env.list -d IMAGE_ID:latest
+            docker run -p 3601:3600 --name munnar1 --env-file /home/ubuntu/.env.list -d IMAGE_ID:latest
+            docker ps
+            echo "Latest Image Deployed"
+
+
+
+
+
+
