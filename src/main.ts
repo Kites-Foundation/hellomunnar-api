@@ -55,7 +55,7 @@ async function bootstrap() {
     const swaggerOptions = new DocumentBuilder()
       .setTitle('HelloMunnar')
       .setDescription('HelloMunnar Project')
-      .setVersion('1.0.1')
+      .setVersion('1.0.2')
       .addTag('Kites Foundation')
       .addBearerAuth()
       .setContact(
