@@ -22,7 +22,8 @@ export class ReviewRepository extends Repository<Review> {
     const query = this.createQueryBuilder('reviews');
     query
       .leftJoin('reviews.user', 'user')
-      .select(['reviews', 'reviews.user', 'user', 'user.id'])
+        .leftJoin('user.role', 'roles')
+      .select(['reviews', 'reviews.user','user.email', 'user.id', 'roles.id', 'roles.role'])
       .orderBy('reviews.date', 'DESC');
 
     if (userId) {
