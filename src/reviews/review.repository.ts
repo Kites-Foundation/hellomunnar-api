@@ -18,6 +18,7 @@ export class ReviewRepository extends Repository<Review> {
         typeId,
       offset,
       page,
+        date
     } = reviewFilterDto;
     const query = this.createQueryBuilder('reviews');
     query
@@ -38,7 +39,9 @@ export class ReviewRepository extends Repository<Review> {
     if (typeId) {
       query.andWhere('reviews.typeId = :typeId', { typeId });
     }
-
+    if (date) {
+      query.andWhere('reviews.date = :date', { date });
+    }
     if (destinationId) {
       query.andWhere('reviews.destinationId = :destinationId', {
         destinationId,
