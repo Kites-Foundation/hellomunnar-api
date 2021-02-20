@@ -55,9 +55,10 @@ jobs:
           docker push $IMAGE_ID:$VERSION
   deploy:
     needs: push
+    runs-on: ubuntu-latest
     steps:
       - name: Deploy Docker
-      - uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
