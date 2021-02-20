@@ -85,4 +85,23 @@ export class RoleService {
       });
     }
   }
+
+  async roleChecker(id: number, body: any): Promise<any>{
+    const user = await this.roleRepository.findOne({id});
+    if(user) {
+      if(user.role === body.role){
+        return {
+          success: true,
+          status: 200,
+          role: body.role
+        };
+      }
+    }
+    else {
+      throw new UnauthorizedException({
+        detail: 'user not authorized to access this api',
+        code: 'not_authorized',
+      });
+    }
+  }
 }
