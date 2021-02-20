@@ -18,7 +18,7 @@ export default class Users {
   name: string;
 
   @Column()
-  role: string;
+  readonly role: string;
 
   @Column()
   userName: string;

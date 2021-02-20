@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional } from "class-validator";
+import { IsOptional } from 'class-validator';
 
 export class CreateReviewDto {
   @ApiProperty({
@@ -31,7 +31,6 @@ export class CreateReviewDto {
   @ApiProperty({ example: '123' })
   @IsOptional()
   typeId: string;
-
 
   @ApiProperty({
     example: 'Very GOod Experience',

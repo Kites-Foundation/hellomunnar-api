@@ -26,6 +26,11 @@ export class AuthService {
     };
   }
 
+  async getUserById(id: number): Promise<any> {
+    const user = await this.userRepository.findOne(id);
+    return user;
+  }
+
   async getUser(email: any): Promise<any> {
     const user = await this.userRepository.findOne({
       email: email,
