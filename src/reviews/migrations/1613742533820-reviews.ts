@@ -46,7 +46,7 @@ export class reviews1613742533820 implements MigrationInterface {
           {
             name: 'rating',
             type: 'bigint',
-            isNullable: false,
+            isNullable: true,
           },
           {
             name: 'date',

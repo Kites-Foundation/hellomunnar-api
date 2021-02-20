@@ -46,6 +46,7 @@ export class ReviewsController {
     @Request() req: any,
     @Body() createReviewDto: CreateReviewDto,
   ): Promise<Review> {
+    createReviewDto.status = 'pending';
     createReviewDto.userId = req.user.id;
     this.logger.verbose('Api Triggered', req.user.email);
     return this.reviewService.createReview(createReviewDto);

@@ -23,10 +23,11 @@ export class Review {
 
   @Column({ nullable: true })
   facilityId: number;
+
   @Column()
   title: string;
 
-  @Column()
+  @Column({ nullable: true })
   rating: number;
 
   @Column()

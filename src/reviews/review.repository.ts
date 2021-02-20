@@ -63,6 +63,8 @@ export class ReviewRepository extends Repository<Review> {
       destinationId,
       imageUrls,
       title,
+        rating,
+        status
     } = createReviewDto;
     const review = new Review();
 
@@ -71,6 +73,8 @@ export class ReviewRepository extends Repository<Review> {
     review.destinationId = destinationId;
     review.userId = userId;
     review.title = title;
+    review.rating = rating;
+    review.status = status;
 
     await this.save(review);
     return {

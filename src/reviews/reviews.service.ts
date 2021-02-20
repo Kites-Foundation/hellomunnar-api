@@ -53,7 +53,8 @@ export class ReviewsService {
     await this.reviewRepository.save(review);
     return {
       success: true,
-      message: 'Reply sent successfully',
+      message: 'Status Updated Successfully',
+      review: review
     };
   }
   async deleteReview(id: number): Promise<any> {

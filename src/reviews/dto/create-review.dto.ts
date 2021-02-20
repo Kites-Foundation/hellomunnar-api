@@ -20,10 +20,22 @@ export class CreateReviewDto {
   title: string;
 
   @ApiProperty({
+    example: '5',
+    description: 'rating from 1 to 5',
+  })
+  rating: number;
+
+  @ApiProperty({
     example: 'Very good experience',
     description: 'Review Body',
   })
   content: string;
+
+  @ApiProperty({
+    example: 'Defautls to Pending',
+    description: 'Pending',
+  })
+  status: string;
 
   @ApiProperty({
     example:
