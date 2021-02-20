@@ -33,6 +33,9 @@ export class Review {
   @Column()
   date: Date;
 
+  @Column({nullable: true})
+  typeId: number;
+
   @Column()
   status: string;
 

@@ -13,6 +13,9 @@ export class ReviewRepository extends Repository<Review> {
       status,
       destinationId,
       limit,
+        facilityId,
+        activityId,
+        typeId,
       offset,
       page,
     } = reviewFilterDto;
@@ -24,6 +27,15 @@ export class ReviewRepository extends Repository<Review> {
 
     if (userId) {
       query.andWhere('reviews.userId = :userId', { userId });
+    }
+    if (facilityId) {
+      query.andWhere('reviews.facilityId = :facilityId', { facilityId });
+    }
+    if (activityId) {
+      query.andWhere('reviews.activityId = :activityId', { activityId });
+    }
+    if (typeId) {
+      query.andWhere('reviews.typeId = :typeId', { typeId });
     }
 
     if (destinationId) {

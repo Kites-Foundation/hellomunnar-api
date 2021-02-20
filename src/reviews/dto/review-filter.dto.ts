@@ -12,6 +12,18 @@ export class ReviewFilterDto {
 
   @ApiProperty({ example: null })
   @IsOptional()
+  facilityId: number;
+
+  @ApiProperty({ example: null })
+  @IsOptional()
+  activityId: number;
+
+  @ApiProperty({ example: null })
+  @IsOptional()
+  typeId: number;
+
+  @ApiProperty({ example: null })
+  @IsOptional()
   status: string;
 
   @ApiProperty({ example: null })

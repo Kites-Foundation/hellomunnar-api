@@ -8,10 +8,23 @@ export class CreateReviewDto {
   userId: number;
 
   @ApiProperty({
-    example: 'D-047',
+    example: '123',
     description: 'Destination Id',
   })
   destinationId: number;
+
+  @ApiProperty({
+    example: '123',
+    description: 'Destination Id',
+  })
+  facilityId: number;
+
+  @ApiProperty({
+    example: '123',
+    description: 'Destination Id',
+  })
+  activityId: number;
+
 
   @ApiProperty({
     example: 'Very GOod Experience',
