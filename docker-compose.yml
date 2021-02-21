@@ -15,7 +15,7 @@ services:
       - DB_NAME=hellomunnar
       - DB_SSL=false
     env_file:
-      - ".env.docker"
+      - ".env"
     networks:
       - default
     depends_on: 
