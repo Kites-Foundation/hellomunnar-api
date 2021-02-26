@@ -16,26 +16,18 @@ export default class Users {
   id: number;
   @Column()
   name: string;
-
   @Column()
   readonly role: string;
-
   @Column()
   userName: string;
   @Column()
   email: string;
-  @Column({ nullable: true })
-  password: string;
   @Column({ nullable: true, length: 2000 })
   token: string;
   @Column({ nullable: true })
   googleId: string;
   @Column({ length: 2000 })
   googleImageUrl: string;
-  @Column({ nullable: true })
-  facebookId: string;
-  @Column({ nullable: true, length: 200 })
-  facebookImageUrl: string;
   @Column()
   status: string;
   @Column()

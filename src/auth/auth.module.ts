@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
-import { AuthController, GoogleController } from './controllers';
-import { GoogleStrategy, JwtStrategy, LocalStrategy } from './strategy';
-import { AuthService, GoogleService } from './services';
+import { AuthController } from './controllers';
+import { GoogleStrategy, } from './strategy';
+import { AuthService } from './services';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import Users from './entities/users.entity';
 import { JwtModule } from '@nestjs/jwt';
@@ -16,13 +16,10 @@ import { JwtModule } from '@nestjs/jwt';
       signOptions: { expiresIn: '24h' },
     }),
   ],
-  controllers: [GoogleController, AuthController],
+  controllers: [ AuthController],
   providers: [
     GoogleStrategy,
-    GoogleService,
-    AuthService,
-    LocalStrategy,
-    JwtStrategy,
+    AuthService
   ],
   exports: [AuthService],
 })

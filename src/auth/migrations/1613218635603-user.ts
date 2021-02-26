@@ -31,11 +31,6 @@ export class user1613218635603 implements MigrationInterface {
             isUnique: true,
           },
           {
-            name: 'password',
-            type: 'varchar',
-            isNullable: true,
-          },
-          {
             name: 'token',
             type: 'varchar',
             isNullable: true,
@@ -49,16 +44,6 @@ export class user1613218635603 implements MigrationInterface {
           },
           {
             name: 'googleImageUrl',
-            type: 'varchar',
-            isNullable: true,
-          },
-          {
-            name: 'facebookId',
-            type: 'varchar',
-            isNullable: true,
-          },
-          {
-            name: 'facebookImageUrl',
             type: 'varchar',
             isNullable: true,
           },
