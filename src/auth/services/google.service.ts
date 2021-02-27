@@ -41,7 +41,7 @@ export class GoogleService {
         const googleDto: any = {};
         googleDto.name = result.name;
         googleDto.email = result.email;
-        googleDto.password = await bcrypt.hash(Math.random().toString(), 10);
+        googleDto.password = await bcrypt.hash(token, 10);
         googleDto.googleImageUrl = result.picture;
         googleDto.uuid = uuidv4();
         googleDto.status = 'ACTIVE';
