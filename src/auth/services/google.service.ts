@@ -29,7 +29,9 @@ export class GoogleService {
           const payload = ticket.getPayload();
           return payload;
         };
-        return verify().catch(console.error);
+        return verify().catch(() => {
+          console.log('invalid token');
+        });
       };
 
       const result = await tokenVerifier(token);
@@ -76,6 +78,11 @@ export class GoogleService {
             user: user,
           };
         }
+      } else {
+        return {
+          success: false,
+          message: 'Invalid token...!',
+        };
       }
     } catch (err) {
       this.logger.error(err);
