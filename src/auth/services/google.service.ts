@@ -17,7 +17,6 @@ export class GoogleService {
   ) {}
 
   async googleLogin(token: String): Promise<any> {
-    console.log(token);
     const tokenVerifier = async (token) => {
       const verify = async () => {
         const CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
@@ -33,7 +32,6 @@ export class GoogleService {
     };
 
     const result = await tokenVerifier(token);
-    console.log(result);
     if (result) {
       const user = await this.userRepository.findOne({
         email: result.email,
