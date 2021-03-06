@@ -34,6 +34,7 @@
     "compression": "^1.7.4",
     "dotenv": "^8.2.0",
     "express-rate-limit": "^5.2.6",
+    "google-auth-library": "^7.0.2",
     "helmet": "^4.4.1",
     "husky": "^5.0.9",
     "nestjs-redoc": "^2.1.1",

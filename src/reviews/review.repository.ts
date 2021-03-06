@@ -13,17 +13,24 @@ export class ReviewRepository extends Repository<Review> {
       status,
       destinationId,
       limit,
-        facilityId,
-        activityId,
-        typeId,
+      facilityId,
+      activityId,
+      typeId,
       offset,
       page,
-        date
+      date,
     } = reviewFilterDto;
     const query = this.createQueryBuilder('reviews');
     query
       .leftJoin('reviews.user', 'user')
-      .select(['reviews', 'reviews.user','user.email','user.googleImageUrl' ,'user.id', 'user.role'])
+      .select([
+        'reviews',
+        'reviews.user',
+        'user.email',
+        'user.googleImageUrl',
+        'user.id',
+        'user.role',
+      ])
       .orderBy('reviews.date', 'DESC');
 
     if (userId) {
@@ -56,11 +63,11 @@ export class ReviewRepository extends Repository<Review> {
     }
 
     try {
-      const [data, total] = await query.getManyAndCount();
+      const [data, count] = await query.getManyAndCount();
       return {
+        count,
         success: true,
         data,
-        total,
       };
     } catch (e) {
       this.logger.error(
@@ -76,13 +83,13 @@ export class ReviewRepository extends Repository<Review> {
       userId,
       content,
       destinationId,
-        activityId,
-        typeId,
+      activityId,
+      typeId,
       imageUrls,
       title,
       rating,
       status,
-        facilityId
+      facilityId,
     } = createReviewDto;
     const review = new Review();
 

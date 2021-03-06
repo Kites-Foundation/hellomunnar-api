@@ -33,7 +33,7 @@ export class Review {
   @Column()
   date: Date;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   typeId: string;
 
   @Column()

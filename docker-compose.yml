@@ -5,8 +5,17 @@ services:
     ports:
       - "3600:3600"
     restart: always
+    environment: 
+      - X_REDIS_PORT=6379
+      - X_REDIS_HOST=cache
+      - DB_HOST=database
+      - DB_PORT=5432
+      - DB_USERNAME=hellomunnar
+      - DB_PASSWORD=hellomunnar
+      - DB_NAME=hellomunnar
+      - DB_SSL=false
     env_file:
-      - ".env.docker"
+      - ".env"
     networks:
       - default
     depends_on: 
@@ -19,6 +28,8 @@ services:
       - POSTGRES_DB=hellomunnar
       - POSTGRES_USER=hellomunnar
       - POSTGRES_PASSWORD=hellomunnar
+    volumes:
+      - ./docker-data/database-data:/var/lib/postgresql/data/ 
     networks:
       - default
   cache:
